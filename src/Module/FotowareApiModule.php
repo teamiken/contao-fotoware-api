@@ -34,7 +34,7 @@ class FotowareApiModule extends \Module
     /**
      * Generates the module.
      */
-    protected function compile2()
+    protected function compile()
     {
         $this->Template->message2 = 'Fotoware Api :)';
     }
