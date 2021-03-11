@@ -1,5 +1,5 @@
 {
-  "name": "teamiken/contao-fotoware-api",
+  "name": "teamiken/contao-fotoware-api-bundle",
   "type": "contao-bundle",
   "description": "Fotoware api for custom Contao 4 bundles",
   "homepage": "https://contao.org",
