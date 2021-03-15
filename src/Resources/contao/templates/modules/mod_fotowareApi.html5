@@ -15,19 +15,13 @@
 <div class="mod_fotowareApiList block">
 	<div class="newsteaser block autogrid one_fourth block<?php echo $this->class; ?>">
 		//image
-		<?php if ($this->addImage): ?>
 		<div class="image_container<?php echo $this->floatClass; ?>" <?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>" <?php endif; ?>>
-			<?php if ($this->text): ?>
 			<a href="<?php echo $this->link; ?>">
-				<?php endif; ?>
 				<?php $this->insert('picture_default', $this->picture); ?>
 				<span class="mod_bookmarker"><i class="fa fa-bookmarker"></i></span>
-				<?php if ($this->text): ?>
 			</a>
-			<?php endif; ?>
 		</div>
-		<?php endif; ?>
-		
+
 		//content
 		<div class="content">
 			<div class="info-v2">
