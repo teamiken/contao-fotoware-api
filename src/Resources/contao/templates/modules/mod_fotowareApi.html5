@@ -12,7 +12,7 @@
 
 
 <!-- fotoware api list -->
-<div class="mod_fotowareApiList mt-xs block">
+<div class="mod_fotowareApiList autogrid_wrapper mt-xs block">
 	<div class="autogrid one_fourth block <?php echo $this->class; ?>">
 		<div class="ce_image_box block">
 			<!-- image -->
