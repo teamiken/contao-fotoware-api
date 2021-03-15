@@ -18,13 +18,11 @@
 			<!-- image -->
 			<div class="ce_image block">
 				<div class="image_container">
-					<a href="<?php echo $this->link; ?>">
 						<span class="mod_bookmarker"><i class="fa-bookmark-o fa bookmarker"></i></span>
 						<figure class="image_container">
 							<img src="http://neumann.iken1.timmeserver.de/files/cto_layout/content/slideshow/neumann-pflanzen-slide.jpg" width="100%" height="auto" alt="">
 							<!-- <?php $this->insert('picture_default', $this->fotos); ?> -->
 						</figure>
-					</a>
 				</div>
 			</div>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace teamiken\ContaoFotowareApiController\controller;
+namespace teamiken\ContaoFotowareApiCategoryController\controller;
 
 use Contao\ContentModel;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
