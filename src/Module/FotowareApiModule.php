@@ -37,5 +37,9 @@ class FotowareApiModule extends \Module
     protected function compile()
     {
         $this->Template->message = 'Fotoware Api !!';
+        $this->Template->headline = 'Deutscher Name';
+        $this->Template->headlineLat = 'Lateinischer Name';
+        $this->Template->quality = 'Qualität';
+        $this->Template->quality = 'Größe';
     }
 }
