@@ -4,38 +4,41 @@
 
 <p><?= $this->message; ?></p>
 
-//counter
-<p class="mod_counter mb-xxs"><strong><span><?= $this->counter; ?></span> Ergebnisse</strong></p>
+<!-- counter -->
+<p class="mod_counter"><strong><span><?= $this->counter; ?></span> Ergebnisse</strong></p>
 
-// sort
-<p class="mod_sort mb-xxs"><strong>Sortieren nach <span class="color-accent">Zuletzt modifiziert</span></strong></p>
+<!-- sort -->
+<p class="mod_sort"><strong>Sortieren nach <span class="color-accent">Zuletzt modifiziert</span></strong></p>
 
 
-// fotoware api list
-<div class="mod_fotowareApiList block">
-	<div class="newsteaser block autogrid one_fourth block<?php echo $this->class; ?>">
-		//image
-		<div class="image_container<?php echo $this->floatClass; ?>" <?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>" <?php endif; ?>>
-			<a href="<?php echo $this->link; ?>">
-				<?php $this->insert('picture_default', $this->picture); ?>
-				<span class="mod_bookmarker"><i class="fa fa-bookmarker"></i></span>
-			</a>
-		</div>
-
-		//content
-		<div class="content">
-			<div class="info-v2">
-				<h4 class="headline"><?php echo $this->text ? $this->linkHeadline : $this->newsHeadline; ?></h4>
-				<div class="text">
-					<p><strong><?= $this->headlineLat; ?></strong></p>
-					<p> <i class="fa-certificate fa"></i><?= $this->form; ?></p>
-					<p> <i class="fa-arrows fa"></i><?= $this->size; ?></p>
+<!-- fotoware api list -->
+<div class="mod_fotowareApiList mt-xs block">
+	<div class="newsteaser block autogrid one_fourth block <?php echo $this->class; ?>">
+		<div class="ce_image_box block">
+			<!-- image -->
+			<div class="ce_image block">
+				<div class="image_container" style="">
+					<a href="<?php echo $this->link; ?>">
+						<?php $this->insert('picture_default', $this->picture); ?>
+						<span class="mod_bookmarker"><i class="fa fa-bookmarker"></i></span>
+					</a>
 				</div>
-				<div class="ce_hyperlink ce_hyperlink-extended expand small mt-xxs mb-0 block align-center">
-					<a href="<?php echo $this->link; ?>" class="hyperlink_txt outline" title="Details" target="_blank">Weitere Details</a>
+			</div>
+
+			<!-- content -->
+			<div class="content">
+				<div class="info-v2">
+					<h4 class="headline"><?php echo $this->text ? $this->linkHeadline : $this->newsHeadline; ?></h4>
+					<div class="text">
+						<p><strong><?= $this->headlineLat; ?></strong></p>
+						<p> <i class="fa-certificate fa"></i><?= $this->form; ?></p>
+						<p> <i class="fa-arrows fa"></i><?= $this->size; ?></p>
+					</div>
+					<div class="ce_hyperlink ce_hyperlink-extended expand small mt-xxs mb-0 block align-center">
+						<a href="<?php echo $this->link; ?>" class="hyperlink_txt outline" title="Details" target="_blank">Weitere Details</a>
+					</div>
 				</div>
 			</div>
 		</div>
-
 
 		<?php $this->endblock(); ?>
