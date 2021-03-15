@@ -2,7 +2,7 @@
 
 <?php $this->block('content'); ?>
 
-<p><?= $this->message; ?></p>
+<!-- <p><?= $this->message; ?></p> -->
 
 <!-- counter -->
 <p class="mod_counter"><strong><span><?= $this->counter; ?></span> Ergebnisse</strong></p>
@@ -27,7 +27,6 @@
 
 			<!-- content -->
 			<div class="content">
-				<div class="info-v2">
 					<h4 class="headline"><?php echo $this->text ? $this->linkHeadline : $this->newsHeadline; ?></h4>
 					<div class="text">
 						<p><strong><?= $this->headlineLat; ?></strong></p>
@@ -35,9 +34,8 @@
 						<p> <i class="fa-arrows fa"></i><?= $this->size; ?></p>
 					</div>
 					<div class="ce_hyperlink ce_hyperlink-extended expand small mt-xxs mb-0 block align-center">
-						<a href="<?php echo $this->link; ?>" class="hyperlink_txt outline" title="Details" target="_blank">Weitere Details</a>
+						<a href="#<?php echo $this->link; ?>" class="hyperlink_txt outline" title="Details">Weitere Details</a>
 					</div>
-				</div>
 			</div>
 		</div>
 
