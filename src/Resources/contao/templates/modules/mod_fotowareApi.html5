@@ -13,7 +13,7 @@
 
 <!-- fotoware api list -->
 <div class="mod_fotowareApiList mt-xs block">
-	<div class="newsteaser block autogrid one_fourth block <?php echo $this->class; ?>">
+	<div class="autogrid one_fourth block <?php echo $this->class; ?>">
 		<div class="ce_image_box block">
 			<!-- image -->
 			<div class="ce_image block">
@@ -36,7 +36,7 @@
 					<p> <i class="fa-certificate fa"></i><?= $this->quality; ?></p>
 					<p> <i class="fa-arrows fa"></i><?= $this->size; ?></p>
 				</div>
-				<div class="ce_hyperlink ce_hyperlink-extended expand small mt-xxs mb-0 block align-center">
+				<div class="ce_hyperlink ce_hyperlink-extended expand small mt-xxs">
 					<a href="<?php echo $this->link; ?>" class="hyperlink_txt outline" title="Details">Weitere Details</a>
 				</div>
 			</div>
