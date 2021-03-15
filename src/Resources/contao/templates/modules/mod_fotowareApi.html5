@@ -20,8 +20,8 @@
 				<div class="image_container">
 					<a href="<?php echo $this->link; ?>">
 						<span class="mod_bookmarker"><i class="fa fa-bookmarker"></i></span>
-						 <figure class="image_container">							 
-						<?php $this->insert('picture_default', $this->fotos); ?>
+						<figure class="image_container">
+							<?php $this->insert('picture_default', $this->fotos); ?>
 						</figure>
 					</a>
 				</div>
@@ -29,16 +29,18 @@
 
 			<!-- content -->
 			<div class="content">
-					<h4 class="headline"><?php echo $this->text ? $this->linkHeadline : $this->mainHeadline; ?></h4>
-					<div class="text">
-						<p><strong><?= $this->latHeadline; ?></strong></p>
-						<p> <i class="fa-certificate fa"></i><?= $this->quality; ?></p>
-						<p> <i class="fa-arrows fa"></i><?= $this->size; ?></p>
-					</div>
-					<div class="ce_hyperlink ce_hyperlink-extended expand small mt-xxs mb-0 block align-center">
-						<a href="<?php echo $this->link; ?>" class="hyperlink_txt outline" title="Details">Weitere Details</a>
-					</div>
+				<h4 class="headline"><?php echo $this->text ? $this->linkHeadline : $this->mainHeadline; ?></h4>
+				<div class="text">
+					<p><strong><?= $this->latHeadline; ?></strong></p>
+					<p> <i class="fa-certificate fa"></i><?= $this->quality; ?></p>
+					<p> <i class="fa-arrows fa"></i><?= $this->size; ?></p>
+				</div>
+				<div class="ce_hyperlink ce_hyperlink-extended expand small mt-xxs mb-0 block align-center">
+					<a href="<?php echo $this->link; ?>" class="hyperlink_txt outline" title="Details">Weitere Details</a>
+				</div>
 			</div>
 		</div>
+	</div>
+</div>
 
-		<?php $this->endblock(); ?>
+<?php $this->endblock(); ?>
