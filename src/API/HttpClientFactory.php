@@ -25,5 +25,4 @@ class HttpClientFactory
             'base_uri' => $baseUri
         ]);
     }
-
 }

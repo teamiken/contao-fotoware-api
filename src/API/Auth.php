@@ -19,7 +19,7 @@ class Auth {
         $this->clientId = $clientId;
         $this->secret = $secret;
     }
-
+    
     /**
      * Middleware
      *
