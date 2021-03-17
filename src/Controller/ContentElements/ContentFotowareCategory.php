@@ -26,5 +26,4 @@ class ContentFotowareCategory extends AbstractContentElementController {
 
         return $template->getResponse();
     }
-
 }
