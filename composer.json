@@ -9,31 +9,24 @@
     "homepage": "https://github.com/teamiken"
   }],
   "require": {
-    "php": "^5.6 || ^7.0",
-    "contao/core-bundle": "4.4.*",
-    "symfony/framework-bundle": "^3.3"
-  },
-  "conflict": {
-    "contao/core": "*",
-    "contao/manager-plugin": "<2.0 || >=3.0"
+    "php": "^7.4",
+    "contao/core-bundle": "4.9.*",
+    "guzzlehttp/guzzle": "^7.2",
+    "ext-json": "*"
   },
   "require-dev": {
     "contao/manager-plugin": "^2.0",
-    "friendsofphp/php-cs-fixer": "^2.12",
-    "phpunit/phpunit": "^5.7.26",
-    "symfony/phpunit-bridge": "^3.2"
+    "contao/test-case": "^4.3",
+    "phpunit/phpunit": "^9",
+    "symfony/browser-kit": "4.4.* || 5.2.*",
+    "symfony/phpunit-bridge": "^5.2"
   },
   "extra": {
-    "contao-manager-plugin": "teamiken\\ContaoFotowareApiBundle\\ContaoManager\\Plugin"
+    "contao-manager-plugin": "teamiken\\Fotoware\\ContaoManager\\Plugin"
   },
   "autoload": {
     "psr-4": {
-      "teamiken\\ContaoFotowareApiBundle\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "teamiken\\ContaoFotowareApiBundle\\Tests\\": "tests/"
+      "teamiken\\Fotoware\\": "src/"
     }
   },
   "support": {

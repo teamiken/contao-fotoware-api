@@ -1,3 +1,40 @@
 services:
     _defaults:
         autoconfigure: true
+        autowire: true
+
+    _instanceof:
+        Contao\CoreBundle\Framework\FrameworkAwareInterface:
+            calls:
+                - [ "setFramework", [ "@contao.framework" ] ]
+
+        Symfony\Component\DependencyInjection\ContainerAwareInterface:
+            calls:
+                - [ "setContainer", [ "@service_container" ] ]
+
+    GuzzleHttp\Client:
+        factory: [ 'teamiken\Fotoware\API\HttpClientFactory', 'create' ]
+        arguments: [ '%fotowareBaseUri%' ]
+
+    teamiken\Fotoware\Controller\:
+        resource: ../../../src/Controller
+        public: true
+
+    teamiken\Fotoware\API\TokenStore:
+        arguments: ['%tokenCachePath%']
+
+    teamiken\Fotoware\API\Auth:
+        arguments:
+            - '@GuzzleHttp\Client'
+            - '@teamiken\Fotoware\API\TokenStore'
+            - '%fotowareClientId%'
+            - '%fotowareSecret%'
+
+    teamiken\Fotoware\API\HttpClient:
+        factory: ['teamiken\Fotoware\API\HttpClientFactory', 'createWithMiddleware']
+        arguments: ['@teamiken\Fotoware\API\Auth', '%fotowareBaseUri%']
+
+    teamiken\Fotoware\API\API:
+        arguments:
+            - '@teamiken\Fotoware\API\HttpClient'
+
