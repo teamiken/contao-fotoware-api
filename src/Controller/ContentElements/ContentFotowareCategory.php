@@ -22,8 +22,7 @@ class ContentFotowareCategory extends AbstractContentElementController {
     protected function getResponse(Template $template, ContentModel $model, Request $request): ?Response
     {
         $response = $this->api->get('archives/5014-Highlights-des-Monats');
-        $template->archive = json_decode($response['assets']['data']->getBody());
-        // $template->counter = json_decode($response['assets']['data'][0]->getBody());
+        $template->archive = json_decode($response->getBody());
 
         return $template->getResponse();
     }
