@@ -23,7 +23,7 @@ class ContentFotowareCategory extends AbstractContentElementController {
     {
         $response = $this->api->get('archives/5014-Highlights-des-Monats');
         $template->archive = json_decode($response->getBody());
-        $template->counter = json_decode($response['assets']['data'][0]->getBody());
+        // $template->counter = json_decode($response['assets']['data'][0]->getBody());
 
         return $template->getResponse();
     }
