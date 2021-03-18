@@ -3,7 +3,7 @@
 </pre>
 
   <!-- counter -->
-  <p class="mod_counter"><strong><span><?= $this->counter; ?></span> Ergebnisse</strong></p>
+  <p class="mod_counter"><strong><span><?php count($this->archive); ?></span> Ergebnisse</strong></p>
 
   <!-- sort -->
   <p class="mod_sort"><strong>Sortieren nach <span class="color-accent">Zuletzt modifiziert</span></strong></p>
