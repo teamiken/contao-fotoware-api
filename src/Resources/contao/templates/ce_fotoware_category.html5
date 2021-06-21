@@ -1,0 +1,135 @@
+<div class="mod_fotowareApi fotoware-category">
+
+  <div class="autogrid_wrapper cte block">
+    <!-- Anzahl Ergebnisse -->
+    <div class="ce_autogridwrapper one_half autogrid block">
+      <p class="mod_counter pt-10 mb-xxs"><strong><span><?= count($this->data->assets->data) ?></span> Ergebnisse</strong></p>
+    </div>
+    <!-- Button Merkliste -->
+    <div class="ce_autogridwrapper one_half autogrid block">
+      <div class="ce_hyperlink ce_hyperlink-extended block align-right border-radius-0 default mt-default mb-default mt-default-s mt-default-s">
+        <a href="de/merkliste.html" class="hyperlink_txt outline " title="Zur Merkliste"><i class="fa-long-arrow-right fa"></i>Zur Merkliste</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter Formular -->
+  <div class="ce_form block pb-xs">
+    <form action="" method="get" enctype="application/x-www-form-urlencoded" class="style4 fotoware-filter">
+      <div class="formbody">
+        <div class="widget widget-explanation explanation">
+          <p><strong>Filterdaten</strong></p>
+        </div>
+        <div class="autogrid_wrapper formfield block">
+          <div class="inner">
+            <?php foreach($this->data->taxonomies as $taxonomy): ?>
+            <?php if(!in_array($taxonomy->field, $this->filterExclude) && count($taxonomy->items) > 1): ?>
+            <div class="one_fourth autogrid_mode_auto autogrid block filter-<?= $taxonomy->field ?>">
+              <div class="widget widget-select select<?php if(isset($this->selectedParams[$taxonomy->field])): ?> selected<?php endif; ?>">
+                <select data-field="<?= $taxonomy->field ?>" name="<?= $taxonomy->field ?>" class="select">
+                  <option value=""><?= $taxonomy->label ?></option>
+                  <?php foreach($taxonomy->items as $taxitem): ?>
+                  <?php if($taxitem->count > 0): ?>
+                  <option value="<?= $taxitem->value ?>" <?php if($this->selectedParams[$taxonomy->field] == $taxitem->value): ?> selected<?php endif; ?>><?= $taxitem->label ?> (<?= $taxitem->count ?>)</option>
+                  <?php endif; ?>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+            <?php endif; ?>
+            <?php endforeach; ?>
+
+            <div class="full autogrid_mode_auto autogrid block">
+              <div class="widget widget-submit">
+                <button type="reset" id="ctrl_614" class="expand"><a href="<?= $this->baseUrl ?>">Filter zurücksetzen</a></button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+    </form>
+  </div>
+
+  <!-- Liste Produktteaser -->
+  <div class="autogrid_wrapper cte block mt-s">
+    <?php if(count($this->data->assets->data) >= 1): ?>
+    <?php foreach ($this->data->assets->data as $k=>$asset): ?>
+    <div class="ce_autogridwrapper one_fourth autogrid mb-xs block">
+
+      <div class="ce_image_box block">
+
+        <div class="ce_image block">
+          <i class="fa-bookmark-o fa bookmarker<?php if(in_array($asset->href, $this->bookmarks)): ?> active<?php endif ?>" data-id="<?= $k ?>"></i>
+          <a href="<?= $this->jumpTo . "?asset=" . $asset->href ?>" title="Details">
+            <figure class="image_container" itemscope itemtype="http://schema.org/ImageObject">
+              <img src="<?= $this->fotowareBaseUrl . $asset->previews[11]->href ?>" width="100%" height="auto" alt="">
+            </figure>
+          </a>
+        </div>
+
+        <div class="content">
+          <h4 class="headline"><?= $asset->metadata->{202}->value ?> <?= $asset->metadata->{203}->value ?></h4>
+
+          <div class="text">
+            <p style="margin-bottom: 5px;"> <i class="fa-certificate fa"></i> <?= $asset->metadata->{207}->value ?></p>
+            <p> <i class="fa-arrows fa"></i> <?= $asset->metadata->{205}->value ?></p>
+          </div>
+
+          <div class="ce_hyperlink ce_hyperlink-extended expand small mt-xxs mb-0 block align-center">
+            <a href="<?= $this->jumpTo . "?asset=" . $asset->href ?>" class="hyperlink_txt outline" title="Details">Weitere Details</a>
+          </div>
+
+          <a href="#" class="bookmarker<?php if(in_array($asset->href, $this->bookmarks)): ?> active<?php endif ?>" data-id="<?= $k ?>">
+            <span class="add-to-bookmark"><i class="fa-bookmark-o fa pr-5"></i>Auf Merkliste hinzufügen</span>
+            <span class="remove-from-bookmark"><i class="fa-remove fa pr-5"></i>Von Merkliste entfernen</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <?php endforeach; ?>
+
+    <?php else: ?>
+    <div class="ce_autogridwrapper full autogrid mb-xs block">
+      <p>Keine passenden Ergebnisse zu Ihrer Suche!</p>
+      <button type="reset" id="ctrl_614"><a href="<?= $this->baseUrl ?>">Filter zurücksetzen</a></button>
+    </div>
+    <?php endif; ?>
+
+  </div>
+</div>
+
+<script>
+  jQuery("document").ready(function() {
+    var assets = JSON.parse('<?= json_encode($this->data->assets->data) ?>');
+
+    jQuery(".fotoware-filter select").on("change", function() {
+      jQuery(".fotoware-filter").submit();
+    })
+
+    jQuery(".fotoware-category .bookmarker").on("click", function(e) {
+      e.preventDefault();
+      console.log("Bookmark clicked");
+      var id = this.dataset.id;
+      jQuery('.fotoware-category .bookmarker[data-id="' + id + '"]').each(function(idx, el) {
+        el.classList.toggle("active");
+      })
+      jQuery.ajax({
+          type: "POST",
+          url: "/api/fotoware/bookmarks/toggle",
+          data: {
+            asset: assets[id],
+            REQUEST_TOKEN: "{{request_token}}"
+          }
+        })
+        .done(function(data) {
+          console.log(data);
+        })
+        .fail(function() {
+          console.log("fail");
+        })
+    })
+
+  })
+</script>

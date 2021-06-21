@@ -19,7 +19,7 @@ class Auth {
         $this->clientId = $clientId;
         $this->secret = $secret;
     }
-    
+
     /**
      * Middleware
      *
@@ -31,10 +31,6 @@ class Auth {
     {
         return function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler)  {
-                // Token vorhanden?
-                // Wenn ja, füge Token hinzu
-                // Wenn nein, Refresh-Token vorhanden?
-                // Wenn nein, Login
                 $access_token = $this->getAccessToken();
                 $request = $request->withAddedHeader('Authorization', 'Bearer ' . $access_token);
                 return $handler($request, $options);
@@ -43,37 +39,28 @@ class Auth {
     }
 
     /**
-     * @todo Hier fehlt noch alles. Ist nur ein Quick-Fix
-     *
      * @return false|mixed
      */
     public function getAccessToken()
     {
         $token = $this->tokenStore->getToken();
-        if($this->isValid($token)) {
-            return $token;
+
+        // not valid or not exists
+        if(!$token) {
+            $token = $this->login();
         }
 
-        $loginResponse = $this->login();
-        if($loginResponse->getStatusCode() !== 200) {
-            return false;
+        if(!$token) {
+            return "";
         }
 
-        $body = (string)$loginResponse->getBody();
-        $data = json_decode($body);
-
-        $this->tokenStore->setToken($data);
-        return $data->access_token;
+        return $token;
     }
 
-    public function isValid($token):bool
-    {
-        return false;
-    }
 
     public function login()
     {
-        $response = $this->client->request('POST', 'oauth2/token', [
+        $response = $this->client->request('POST', '/fotoweb/oauth2/token', [
             'headers' => [
                 'Content-Type' => 'application/x-www-form-urlencoded',
                 'Accept' => 'application/json'
@@ -85,7 +72,15 @@ class Auth {
             ]
         ]);
 
-        return $response;
+        if($response->getStatusCode() != 200) {
+            return false;
+        }
+
+        $json = (string)$response->getBody();
+        $this->tokenStore->setToken($json);
+        $data = json_decode($json);
+
+        return $data->access_token;
     }
 
 }

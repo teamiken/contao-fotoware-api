@@ -1,0 +1,22 @@
+<?php $bookmarks = $_SESSION["_sf2_attributes"]["fotoware_bookmarks"]; ?>
+<?php //unset($_SESSION["_sf2_attributes"]["fotoware_bookmarks"]); ?>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bild</th>
+      <th>Produkt</th>
+      <th>Anzahl</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($bookmarks as $bookmark): ?>
+    <tr>
+      <td><img src="https://media.neumann-pflanzen.de<?= $bookmark["previews"][4]["href"] ?>" width="200"</td>
+      <td><?= $bookmark["thumbnailFields"]["firstLine"]["value"] ?> <?= $bookmark["thumbnailFields"]["secondLine"]["value"] ?> <?= $bookmark["thumbnailFields"]["thirdLine"]["value"] ?></td>
+      <td>1x</td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+<?php

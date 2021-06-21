@@ -2,6 +2,8 @@ services:
     _defaults:
         autoconfigure: true
         autowire: true
+#        bind:
+#            $fotowareBaseUri: '%fotowareBaseUri%'
 
     _instanceof:
         Contao\CoreBundle\Framework\FrameworkAwareInterface:
@@ -21,7 +23,7 @@ services:
         public: true
 
     teamiken\Fotoware\API\TokenStore:
-        arguments: ['%tokenCachePath%']
+        arguments: ['%kernel.cache_dir%']
 
     teamiken\Fotoware\API\Auth:
         arguments:
@@ -38,3 +40,14 @@ services:
         arguments:
             - '@teamiken\Fotoware\API\HttpClient'
 
+    teamiken\Fotoware\Controller\ContentElements\FotowareCategory:
+        arguments:
+            - '@teamiken\Fotoware\API\API'
+            - '@Symfony\Component\HttpFoundation\Session\SessionInterface'
+            - '%fotowareBaseUri%'
+
+    teamiken\Fotoware\Controller\ContentElements\FotowareReader:
+        arguments:
+            - '@teamiken\Fotoware\API\API'
+            - '@Symfony\Component\HttpFoundation\Session\SessionInterface'
+            - '%fotowareBaseUri%'

@@ -1,0 +1,82 @@
+<?php
+  $items = 4;
+  $ids = array_rand($this->data->assets->data, $items);
+  shuffle($ids);
+
+  foreach($ids as $id) {
+    $data[] = $this->data->assets->data[$id];
+  }
+?>
+
+<div class="mod_fotowareApi fotoware-category">
+
+  <div class="autogrid_wrapper cte block">
+    <?php foreach ($data as $k=>$asset): ?>
+    <div class="ce_autogridwrapper one_fourth autogrid mb-xs block">
+
+      <div class="ce_image_box block">
+
+        <div class="ce_image block">
+          <i class="fa-bookmark-o fa bookmarker<?php if(in_array($asset->href, $this->bookmarks)): ?> active<?php endif ?>" data-id="<?= $k ?>"></i>
+          <a href="<?= $this->jumpTo . "?asset=" . $asset->href ?>" title="Details">
+            <figure class="image_container" itemscope itemtype="http://schema.org/ImageObject">
+              <img src="<?= $this->fotowareBaseUrl . $asset->previews[11]->href ?>" width="100%" height="auto" alt="">
+            </figure>
+          </a>
+        </div>
+
+        <div class="content">
+          <h4 class="headline"><?= $asset->metadata->{202}->value ?> <?= $asset->metadata->{203}->value ?></h4>
+
+          <div class="text">
+            <p style="margin-bottom: 5px;"> <i class="fa-certificate fa"></i> <?= $asset->metadata->{207}->value ?></p>
+            <p> <i class="fa-arrows fa"></i> <?= $asset->metadata->{205}->value ?></p>
+          </div>
+
+          <div class="ce_hyperlink ce_hyperlink-extended expand small mt-xxs mb-0 block align-center">
+            <a href="<?= $this->jumpTo . "?asset=" . $asset->href ?>" class="hyperlink_txt outline" title="Details">Weitere Details</a>
+          </div>
+
+          <a href="#" class="bookmarker<?php if(in_array($asset->href, $this->bookmarks)): ?> active<?php endif ?>" data-id="<?= $k ?>">
+            <span class="add-to-bookmark"><i class="fa-bookmark-o fa pr-5"></i>Auf Merkliste hinzufügen</span>
+            <span class="remove-from-bookmark"><i class="fa-remove fa pr-5"></i>Von Merkliste entfernen</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <?php endforeach; ?>
+  </div>
+</div>
+
+<script>
+  jQuery("document").ready(function() {
+
+    var assets = JSON.parse('<?= json_encode($data) ?>');
+
+    jQuery(".fotoware-category .bookmarker").on("click", function(e) {
+      e.preventDefault();
+      console.log("Category Bookmark clicked");
+      var id = this.dataset.id;
+      console.log(id);
+      jQuery('.fotoware-category .bookmarker[data-id="' + id + '"]').each(function(idx, el) {
+        el.classList.toggle("active");
+      })
+      jQuery.ajax({
+          type: "POST",
+          url: "/api/fotoware/bookmarks/toggle",
+          data: {
+            asset: assets[id],
+            REQUEST_TOKEN: "{{request_token}}"
+          }
+        })
+        .done(function(data) {
+          console.log(data);
+        })
+        .fail(function() {
+          console.log("fail");
+        })
+    })
+
+  })
+</script>

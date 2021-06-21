@@ -1,0 +1,304 @@
+<?php if($this->error): ?>
+  <div class="error">Es konnte kein Datensatz gefunden werden.</div>
+<?php else: ?>
+
+  <?php
+  if(empty($this->data->count)) {
+    $this->data->count = 1;
+  }
+  ?>
+
+  <div class="mod_fotowareApi fotoware-reader">
+    <div class="autogrid_wrapper cte block">
+      <div class="ce_autogridwrapper one_half autogrid mb-xs block">
+
+        <div class="ce_image_box block">
+          <div class="ce_image block">
+            <i class="fa-bookmark-o fa bookmarker<?php if(in_array($this->data->href, $this->bookmarks)): ?> active<?php endif ?>"></i>
+            <figure class="image_container" itemscope itemtype="http://schema.org/ImageObject">
+              <img src="<?= $this->baseUrl . $this->data->previews[0]->href  ?>" width="100%" height="auto" alt="">
+            </figure>
+          </div>
+        </div>
+        <div class="ce_hyperlink ce_hyperlink-extended expand mt-0 mb-xxs block align-center">
+          <a href="#" class="hyperlink_txt bg-grey" title="In unserer Ar-App ansehen"><i class="fa-mobile-phone fa"></i>In unserer Ar-App ansehen</a>
+        </div>
+      </div>
+
+      <div class="ce_autogridwrapper one_half autogrid mt-s mb-s block">
+        <div class="content">
+          <p class="quality color-accent mb-10"><strong><?= $this->data->metadata->{207}->value ?></strong></p>
+          <h1 class="headline mb-10">Produktname in Deutsch</h1>
+          <!-- <p class="font-size-xs"><?= $this->data->thumbnailFields->firstLine->value ?> <?= $this->data->thumbnailFields->secondLine->value ?> <?= $this->data->thumbnailFields->thirdLine->value ?></p> -->
+          <p class="name font-size-xxs"><strong><?= $this->data->metadata->{202}->value ?> <?= $this->data->metadata->{203}->value ?> <?= $this->data->metadata->{204}->value ?></strong></p>
+
+          <div class="block mt-xxs">
+            <p class="quantity">Menge</p>
+            <div class="number-input">
+              <button class="stepdown"></button>
+              <input id="quantity" data-id="<?= md5($this->data->href) ?>" class="quantity" min="1" name="quantity" value="<?= $this->data->count ?>" type="number">
+              <button class="plus stepup"></button>
+            </div>
+          </div>
+
+          <div class="tags mt-xs mb-xxs">
+            <!-- <h4>Tags</h4> -->
+            <ul>
+              <?php foreach($this->data->builtinFields[2]->value as $tag): ?>
+                <li><?= $tag ?></li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+          <a href="#" class="btn btn-primary set-bookmark">Anfrage stellen</a>
+          <a href="<?= $this->jumpTo ?>" class="btn btn-primary">Zur Merkliste</a>
+          <a href="#" class="btn btn-primary bookmarker<?php if(in_array($this->data->href, $this->bookmarks)): ?> active<?php endif ?>">
+            <span class="add-to-bookmark">Auf die Merkliste</span>
+            <span class="remove-from-bookmark">Von der Merkliste entfernen</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ce_divider_extended block version3 align-center mt-m mb-xl mt-default-s mt-default-s">
+      <span class="divider-one"></span>
+      <span class="divider-two"></span>
+      <span class="divider-three"></span>
+    </div>
+
+    <!--  block eigentschaften -->
+    <h3 class="align-center">Eigenschaften</h3>
+
+    <div style="max-width: 900px; margin: 0 auto;">
+
+      <div class="autogrid_wrapper cte block mt-s mb-xxs">
+        <div class="ce_autogridwrapper one_third autogrid block">
+
+          <div class="ce_iconbox block version3">
+            <div class="ce_iconbox_outside" style="">
+              <div class="ce_iconbox_inside">
+                <div class="ce_iconbox_icon">
+                  <i class="fa fa-tree"></i>
+                </div>
+                <div class="ce_iconbox_cwrapper">
+                  <div class="content">
+                    <p><strong>Gattung:</strong> <?= $this->data->thumbnailFields->firstLine->value ?><br>
+                      <strong>Art:</strong> <?= $this->data->thumbnailFields->secondLine->value ?><br>
+                      <strong>Sorte:</strong> <?= $this->data->metadata->{204}->value ?><br>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="ce_autogridwrapper one_third autogrid block">
+
+          <div class="ce_iconbox block version3">
+            <div class="ce_iconbox_outside" style="">
+              <div class="ce_iconbox_inside">
+                <div class="ce_iconbox_icon">
+                  <i class="fa fa-certificate"></i>
+                </div>
+                <div class="ce_iconbox_cwrapper">
+                  <div class="content">
+                    <p><strong>Qualität</strong> <br>
+                      <?= $this->data->metadata->{207}->value ?>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="ce_autogridwrapper one_third autogrid block">
+
+          <div class="ce_iconbox block version3">
+            <div class="ce_iconbox_outside" style="">
+              <div class="ce_iconbox_inside">
+                <div class="ce_iconbox_icon">
+                  <i class="fa fa-arrows"></i>
+                </div>
+                <div class="ce_iconbox_cwrapper">
+                  <div class="content">
+                    <p><strong>Größe</strong> <br>
+                      <?= $this->data->metadata->{205}->value ?>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="autogrid_wrapper cte block mb-s">
+        <div class="ce_autogridwrapper one_third autogrid block">
+
+          <div class="ce_iconbox block version3">
+            <div class="ce_iconbox_outside" style="">
+              <div class="ce_iconbox_inside">
+                <div class="ce_iconbox_icon">
+                  <i class="fa fa-map-marker"></i>
+                </div>
+                <div class="ce_iconbox_cwrapper">
+                  <div class="content">
+                    <p><strong>Pflanzort</strong> <br>
+                      xxxx
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="ce_autogridwrapper one_third autogrid block">
+
+          <div class="ce_iconbox block version3">
+            <div class="ce_iconbox_outside" style="">
+              <div class="ce_iconbox_inside">
+                <div class="ce_iconbox_icon">
+                  <i class="fa fa-leaf"></i>
+                </div>
+                <div class="ce_iconbox_cwrapper">
+                  <div class="content">
+                    <p><strong>Blattwerk</strong> <br>
+                      xxxx
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="ce_autogridwrapper one_third autogrid block">
+
+          <div class="ce_iconbox block version3">
+            <div class="ce_iconbox_outside" style="">
+              <div class="ce_iconbox_inside">
+                <div class="ce_iconbox_icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+                <div class="ce_iconbox_cwrapper">
+                  <div class="content">
+                    <p><strong>Blühzeit</strong> <br>
+                      xxxx
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- <div class="autogrid_wrapper cte block mt-xs">
+      <p class="align-center">
+        <a href="de/bestellanfrage.html"><i class="fa-long-arrow-left fa"></i> zurück</a> | <a href="de/bestellanfrage.html">weiter <i class="fa-long-arrow-right fa"></i></a>
+      </p>
+    </div> -->
+
+  </div>
+
+<?php endif; ?>
+
+<script>
+  (function($) {
+    jQuery("document").ready(function() {
+
+      var asset = JSON.parse('<?= json_encode($this->data) ?>');
+      var debounce;
+
+      jQuery(".fotoware-reader .bookmarker").on("click", function(e) {
+        e.preventDefault();
+        var self = this;
+        console.log("Reader Bookmark clicked");
+        var id = this.dataset.id;
+
+        jQuery.ajax({
+          type: "POST",
+          url: "/api/fotoware/bookmarks/toggle",
+          data: {
+            asset: asset,
+            REQUEST_TOKEN: "{{request_token}}"
+          }
+        })
+            .done(function(data) {
+              console.log(data);
+
+              if($(".fotoware-reader .bookmarker")[0].classList.contains("active")) {
+                $("#quantity").val(1);
+              }
+
+              jQuery('.fotoware-reader .bookmarker').each(function(idx, el) {
+                el.classList.toggle("active");
+              })
+            })
+            .fail(function() {
+              console.log("fail");
+            })
+      })
+
+      function sendToApi(count, redirect=false) {
+        // Clear any existing debounce event
+        clearTimeout(debounce);
+
+        debounce = setTimeout(function () {
+          jQuery.ajax({
+            type: "POST",
+            url: "/api/fotoware/bookmarks",
+            data: {
+              asset: asset,
+              count: count,
+              REQUEST_TOKEN: "{{request_token}}"
+            }
+          })
+              .done(function(data) {
+                console.log(data);
+                if(redirect) {
+                  window.location.href = "<?= $this->jumpTo ?>";
+                }
+                jQuery('.fotoware-reader .bookmarker').each(function(idx, el) {
+                  el.classList.add("active");
+                })
+              })
+              .fail(function() {
+                console.log("fail");
+              })
+        }, 500);
+      }
+
+      $(".stepdown").click(function(e) {
+        var el = this.parentNode.querySelector('input[type=number]');
+        if(el.value > 1) {
+          el.value--;
+          sendToApi(el.value);
+        }
+      })
+
+      $(".stepup").click(function(e) {
+        var el = this.parentNode.querySelector('input[type=number]');
+        el.value++;
+        sendToApi(el.value);
+      })
+
+      $(".set-bookmark").click(function(e) {
+        e.preventDefault();
+        var count = $("#quantity")[0].value;
+        sendToApi(count, true);
+      })
+
+      $(".quantity").change(function () {
+        sendToApi(this.value);
+      })
+
+    })
+  })(jQuery);
+</script>
