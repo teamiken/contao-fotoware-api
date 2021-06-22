@@ -26,8 +26,8 @@
             <?php if(!in_array($taxonomy->field, $this->filterExclude) && count($taxonomy->items) > 1): ?>
             <div class="one_fourth autogrid_mode_auto autogrid block filter-<?= $taxonomy->field ?>">
               <div class="widget widget-select select<?php if(isset($this->selectedParams[$taxonomy->field])): ?> selected<?php endif; ?>">
-                <select data-field="<?= $taxonomy->field ?>" name="<?= $taxonomy->field ?>" class="select <?php if($taxonomy->hasChildren == true): ?>inaktive<?php endif; ?>">
-                  <option value="<?= $taxonomy->value ?>"><?= $taxonomy->label ?></option>
+                <select data-field="<?= $taxonomy->field ?>" name="<?= $taxonomy->field ?>" class="select">
+                  <option value=""><?= $taxonomy->label ?></option>
                   <?php foreach($taxonomy->items as $taxitem): ?>
                   <?php if($taxitem->count > 0): ?>
                   <option value="<?= $taxitem->value ?>" <?php if($this->selectedParams[$taxonomy->field] == $taxitem->value): ?> selected<?php endif; ?>><?= $taxitem->label ?> (<?= $taxitem->count ?>)</option>
@@ -102,7 +102,7 @@
 
 <script>
   jQuery("document").ready(function() {
-    var assets = JSON.parse('<?= json_encode(urlencode($this->data->assets->data)) ?>');
+    var assets = JSON.parse('<?= json_encode($this->data->assets->data) ?>');
 
     jQuery(".fotoware-filter select").on("change", function() {
       jQuery(".fotoware-filter").submit();
