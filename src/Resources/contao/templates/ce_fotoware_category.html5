@@ -26,8 +26,8 @@
             <?php if(!in_array($taxonomy->field, $this->filterExclude) && count($taxonomy->items) > 1): ?>
             <div class="one_fourth autogrid_mode_auto autogrid block filter-<?= $taxonomy->field ?>">
               <div class="widget widget-select select<?php if(isset($this->selectedParams[$taxonomy->field])): ?> selected<?php endif; ?>">
-                <select data-field="<?= $taxonomy->field ?>" name="<?= $taxonomy->field ?>" class="select <?= $taxonomy->count ?>">
-                  <option value=""><?= $taxonomy->label ?></option>
+                <select data-field="<?= $taxonomy->field ?>" name="<?= $taxonomy->field ?>" class="select <?php if($taxonomy->items > 0): ?>inaktive<?php endif; ?>">
+                  <option value="<?= $taxonomy->label ?>"><?= $taxonomy->label ?></option>
                   <?php foreach($taxonomy->items as $taxitem): ?>
                   <?php if($taxitem->count > 0): ?>
                   <option value="<?= $taxitem->value ?>" <?php if($this->selectedParams[$taxonomy->field] == $taxitem->value): ?> selected<?php endif; ?>><?= $taxitem->label ?> (<?= $taxitem->count ?>)</option>
