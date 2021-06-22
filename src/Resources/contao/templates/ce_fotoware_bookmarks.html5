@@ -1,46 +1,54 @@
-  <?php if($this->error): ?>
-  <div class="error">Es konnte kein Datensatz gefunden werden.</div>
-  <?php else: ?>
+<?php if($this->error): ?>
+<div class="error">Es konnte kein Datensatz gefunden werden.</div>
+<?php else: ?>
 
-    <?php
-      $test = $this->bookmarks;
-    ?>
+<?php
+    $test = $this->bookmarks;
+  ?>
 
-  <div class="mod_fotowareApi fotoware-bookmarks">
-    <table>
-      <?php foreach($this->bookmarks as $asset): ?>
-        <tr>
-          <td><strong><?= $asset["thumbnailFields"]["firstLine"]["value"] ?> <?= $asset["thumbnailFields"]["secondLine"]["value"] ?> <?= $asset["thumbnailFields"]["thirdLine"]["value"] ?></strong></td>
-          <td>
-            <div class="number-input">
-              <button class="stepdown"></button>
-              <input data-id="<?= md5($asset["href"]) ?>" class="merkliste quantity" min="1" name="quantity" value="<?= $asset["count"] ?>" type="number">
-              <button class="plus stepup"></button>
-            </div>
-          </td>
-          <td>
-            <button class="remove" data-id="<?= md5($asset["href"]) ?>"><i class="fa-remove fa pr-5"></i>Entfernen</button>
-          </td>
-        </tr>
-      <?php endforeach; ?>
-    </table>
-  </div>
+<div class="mod_fotowareApi fotoware-bookmarks">
+  <table>
+    <?php if(count($this->bookmarks) > 0): ?>
+    <?php foreach($this->bookmarks as $asset): ?>
+    <tr>
+      <td><strong><?= $asset["thumbnailFields"]["firstLine"]["value"] ?> <?= $asset["thumbnailFields"]["secondLine"]["value"] ?> <?= $asset["thumbnailFields"]["thirdLine"]["value"] ?></strong></td>
+      <td>
+        <div class="number-input">
+          <button class="stepdown"></button>
+          <input data-id="<?= md5($asset["href"]) ?>" class="merkliste quantity" min="1" name="quantity" value="<?= $asset["count"] ?>" type="number">
+          <button class="plus stepup"></button>
+        </div>
+      </td>
+      <td>
+        <button class="remove" data-id="<?= md5($asset["href"]) ?>"><i class="fa-remove fa pr-5"></i>Entfernen</button>
+      </td>
+    </tr>
+    <?php endforeach; ?>
 
-  <?php endif; ?>
+    <?php else: ?>
+    <div class="ce_autogridwrapper full autogrid mb-xs block">
+      <p>Bisher befinden sich keine Produkte auf der Merkliste!</p>
+      <button type="reset"><a href="/bestellanfrage.html" class="hyperlink_txt"><i class="fa-long-arrow-right fa"></i> Produkte ansehen</a></button>
+    </div>
+    <?php endif; ?>
+  </table>
+</div>
 
-  <script>
-    // jQuery
-    (function($) {
-      var debounce;
-      $(document).ready(function(){
+<?php endif; ?>
 
-        function sendToApi(id, count) {
-          // Clear any existing debounce event
-          clearTimeout(debounce);
+<script>
+  // jQuery
+  (function($) {
+    var debounce;
+    $(document).ready(function() {
 
-          // Update and log the counts after 3 seconds
-          debounce = setTimeout(function () {
-            jQuery.ajax({
+      function sendToApi(id, count) {
+        // Clear any existing debounce event
+        clearTimeout(debounce);
+
+        // Update and log the counts after 3 seconds
+        debounce = setTimeout(function() {
+          jQuery.ajax({
               type: "POST",
               url: "/api/fotoware/bookmarks/count/" + count,
               data: {
@@ -48,50 +56,50 @@
                 REQUEST_TOKEN: "{{request_token}}"
               }
             })
-                .done(function(data) {
-                  console.log(data);
-                })
-                .fail(function() {
-                  console.log("fail");
-                })
-          }, 500);
-        }
+            .done(function(data) {
+              console.log(data);
+            })
+            .fail(function() {
+              console.log("fail");
+            })
+        }, 500);
+      }
 
-        $(".stepdown").click(function(el) {
-          var el = this.parentNode.querySelector('input[type=number]');
-          if(el.value > 1) {
-            el.value--;
-            sendToApi(el.dataset.id, el.value);
-          }
-        })
-
-        $(".stepup").click(function(el) {
-          var el = this.parentNode.querySelector('input[type=number]');
-          el.value++;
+      $(".stepdown").click(function(el) {
+        var el = this.parentNode.querySelector('input[type=number]');
+        if (el.value > 1) {
+          el.value--;
           sendToApi(el.dataset.id, el.value);
-        })
+        }
+      })
 
-        $(".merkliste").change(function () {
-          sendToApi(this.dataset.id, this.value);
-        })
+      $(".stepup").click(function(el) {
+        var el = this.parentNode.querySelector('input[type=number]');
+        el.value++;
+        sendToApi(el.dataset.id, el.value);
+      })
 
-        $(".remove").click(function(e) {
-          var self = this;
-          jQuery.ajax({
+      $(".merkliste").change(function() {
+        sendToApi(this.dataset.id, this.value);
+      })
+
+      $(".remove").click(function(e) {
+        var self = this;
+        jQuery.ajax({
             type: "DELETE",
             url: "/api/fotoware/bookmarks/" + this.dataset.id,
             data: {
               REQUEST_TOKEN: "{{request_token}}"
             }
           })
-            .done(function(data) {
-              self.parentNode.parentNode.remove();
-              console.log(data);
-            })
-            .fail(function() {
-              console.log("fail");
-            })
-        })
+          .done(function(data) {
+            self.parentNode.parentNode.remove();
+            console.log(data);
+          })
+          .fail(function() {
+            console.log("fail");
+          })
       })
-    })(jQuery);
-  </script>
+    })
+  })(jQuery);
+</script>
