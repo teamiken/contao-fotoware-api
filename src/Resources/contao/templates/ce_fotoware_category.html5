@@ -26,7 +26,7 @@
             <?php if(!in_array($taxonomy->field, $this->filterExclude) && count($taxonomy->items) > 1): ?>
             <div class="one_fourth autogrid_mode_auto autogrid block filter-<?= $taxonomy->field ?>">
               <div class="widget widget-select select<?php if(isset($this->selectedParams[$taxonomy->field])): ?> selected<?php endif; ?>">
-                <select data-field="<?= $taxonomy->field ?>" name="<?= $taxonomy->field ?>" class="select">
+                <select data-field="<?= $taxonomy->field ?>" name="<?= $taxonomy->field ?>" class="select <?php if($taxitem->count == 0): ?>inactive<?php endif; ?>">
                   <option value=""><?= $taxonomy->label ?></option>
                   <?php foreach($taxonomy->items as $taxitem): ?>
                   <?php if($taxitem->count > 0): ?>
@@ -41,7 +41,7 @@
 
             <div class="full autogrid_mode_auto autogrid block">
               <div class="widget widget-submit">
-                <button type="reset" id="ctrl_614" class="expand"><a href="<?= $this->baseUrl ?>">Filter zurücksetzen</a></button>
+                <button type="reset" class="expand"><a href="<?= $this->baseUrl ?>">Filter zurücksetzen</a></button>
               </div>
             </div>
 
@@ -93,7 +93,7 @@
     <?php else: ?>
     <div class="ce_autogridwrapper full autogrid mb-xs block">
       <p>Keine passenden Ergebnisse zu Ihrer Suche!</p>
-      <button type="reset" id="ctrl_614"><a href="<?= $this->baseUrl ?>">Filter zurücksetzen</a></button>
+      <button type="reset"><a href="<?= $this->baseUrl ?>">Filter zurücksetzen</a></button>
     </div>
     <?php endif; ?>
 
