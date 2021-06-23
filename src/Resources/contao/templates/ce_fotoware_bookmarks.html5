@@ -11,7 +11,7 @@
     <?php if(count($this->bookmarks) > 0): ?>
     <?php foreach($this->bookmarks as $asset): ?>
     <tr>
-      <td><strong><?= $asset["thumbnailFields"]["firstLine"]["value"] ?> <?= $asset["thumbnailFields"]["secondLine"]["value"] ?> <?= $asset["thumbnailFields"]["thirdLine"]["value"] ?></strong></td>
+      <td><strong><?= $asset["thumbnailFields"]["firstLine"]["value"] ?> <?= $asset["thumbnailFields"]["secondLine"]["value"] ?> <?= $asset["thumbnailFields"]["thirdLine"]["value"] ?> <?= $asset["metadata"]["204"]["value"] ?></strong></td>
       <td>
         <div class="number-input">
           <button class="stepdown"></button>

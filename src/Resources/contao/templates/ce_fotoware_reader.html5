@@ -22,7 +22,7 @@
         </div>
         <div class="content">
           <p class="quality color-accent mb-5"><strong><?= $this->data->metadata->{207}->value ?></strong></p>
-          <h1 class="headline mb-xs"><?= $this->data->metadata->{202}->value ?> <?= $this->data->metadata->{203}->value ?> <?= $this->data->metadata->{204}->value ?></h1>
+          <h1 class="headline mb-xs"><?= $this->data->metadata->{202}->value ?> <?= $this->data->metadata->{203}->value ?> <?php if(isset($this->data->metadata->{204}->value)): ?>"<?= $this->data->metadata->{204}->value ?>"<?php endif; ?></h1>
 
           <!-- menge -->
           <div class="block mt-xs mb-xs">

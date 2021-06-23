@@ -1,6 +1,5 @@
 <?php $bookmarks = $_SESSION["_sf2_attributes"]["fotoware_bookmarks"]; ?>
 <?php //unset($_SESSION["_sf2_attributes"]["fotoware_bookmarks"]); ?>
-
 <table>
   <thead>
     <tr>
@@ -13,8 +12,8 @@
     <?php foreach($bookmarks as $bookmark): ?>
     <tr>
       <td><img src="https://media.neumann-pflanzen.de<?= $bookmark["previews"][4]["href"] ?>" width="200"</td>
-      <td><?= $bookmark["thumbnailFields"]["firstLine"]["value"] ?> <?= $bookmark["thumbnailFields"]["secondLine"]["value"] ?> <?= $bookmark["thumbnailFields"]["thirdLine"]["value"] ?></td>
-      <td>1x</td>
+      <td><?= $bookmark["thumbnailFields"]["firstLine"]["value"] ?> <?= $bookmark["thumbnailFields"]["secondLine"]["value"] ?> <?= $bookmark["thumbnailFields"]["thirdLine"]["value"] ?><?= $bookmark["metadata"]["204"]["value"] ?></td>
+      <td><?=$bookmark["count"] ?>x</td>
     </tr>
     <?php endforeach; ?>
   </tbody>

@@ -8,7 +8,7 @@
     <!-- Button Merkliste -->
     <div class="ce_autogridwrapper one_half autogrid block">
       <div class="ce_hyperlink ce_hyperlink-extended block align-right border-radius-0 default mt-default mb-default mt-default-s mt-default-s">
-        <a href="de/merkliste.html" class="hyperlink_txt outline " title="Zur Merkliste"><i class="fa-long-arrow-right fa"></i>Zur Merkliste</a>
+        <a href="de/merkliste.html" class="hyperlink_txt outline" title="Zur Merkliste"><i class="fa-long-arrow-right fa"></i>Zur Merkliste</a>
       </div>
     </div>
   </div>
@@ -72,7 +72,7 @@
           <h4 class="headline"><?= $asset->metadata->{202}->value ?> <?= $asset->metadata->{203}->value ?></h4>
 
           <div class="text">
-            <p style="margin-bottom: 5px;"> <i class="fa-certificate fa"></i> <?= $asset->metadata->{207}->value ?></p>
+            <p style="margin-bottom: 5px;"> <i class="fa-certificate fa"></i> <?= $asset->metadata->{207}->value ?>
             <p> <i class="fa-arrows fa"></i> <?= $asset->metadata->{205}->value ?></p>
           </div>
 
